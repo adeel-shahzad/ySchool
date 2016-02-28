@@ -10,6 +10,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
 @ManagedBean
 @Scope(value = "session")
 @Controller
-public class SearchConverter implements Converter {
+public class SearchConverter implements Converter, Serializable {
     public static List<SearchResult> resultList;
 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {

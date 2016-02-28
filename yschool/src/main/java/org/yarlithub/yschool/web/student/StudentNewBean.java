@@ -1,14 +1,18 @@
 package org.yarlithub.yschool.web.student;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.yarlithub.yschool.repository.model.obj.yschool.Student;
 import org.yarlithub.yschool.service.StudentService;
-
-import javax.faces.bean.ManagedBean;
-import java.io.Serializable;
-import java.util.Date;
 
 
 /**
@@ -17,9 +21,13 @@ import java.util.Date;
  * $LastChangedRevision$
  */
 @ManagedBean
-@Scope(value = "view")
+//@Scope(value = "request")
+@ViewScoped
 @Controller
 public class StudentNewBean implements Serializable {
+	
+	private UIComponent component;
+	private String status;
 
     private String admission_No;
     private String name;
@@ -39,7 +47,15 @@ public class StudentNewBean implements Serializable {
         this.admission_No = admission_No;
     }
 
-    public String getName() {
+    public UIComponent getComponent() {
+		return component;
+	}
+
+	public void setComponent(UIComponent component) {
+		this.component = component;
+	}
+
+	public String getName() {
         return name;
     }
 
@@ -87,12 +103,22 @@ public class StudentNewBean implements Serializable {
         this.address = address;
     }
 
-    public String addStudent() {
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String addStudent() {
 
         Student student = studentService.addNewStudent(admission_No, name, fullname, name_wt_initial, dob, gender, address);
         if (student.getId() > 0) {
+        	status = "Student added successfully";
             return "AddStudentSuccess";
         }
+        status = "Failed to add student. Please add again.";
         return "AddStudentFailed";
     }
 }

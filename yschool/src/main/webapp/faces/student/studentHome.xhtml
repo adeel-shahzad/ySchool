@@ -38,6 +38,10 @@
                 <h:form>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-2">
+                        
+                        <h:outputText type="text"
+                                        value="#{studentNewBean.status} "/>
+                        
                             <h:inputText id="userName" value="#{studentHomeBean.searchKey}" class="form-control">
                                 <p:ajax event="keypress" partialSubmit="suggest_box"></p:ajax>
                             </h:inputText>

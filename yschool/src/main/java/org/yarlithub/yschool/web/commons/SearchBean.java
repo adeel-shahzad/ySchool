@@ -9,6 +9,8 @@ import org.yarlithub.yschool.service.CommonService;
 import org.yarlithub.yschool.web.converter.SearchConverter;
 
 import javax.faces.bean.ManagedBean;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ import java.util.List;
 @ManagedBean
 @Scope(value = "session")
 @Controller
-public class SearchBean {
+public class SearchBean implements Serializable {
 
     @Autowired
     private CommonService commonService;
